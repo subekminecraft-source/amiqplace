@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Logowanie — AmiQPlace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zaloguj się do panelu AmiQPlace — sklep online w kilka minut.">
+  <link rel="stylesheet" href="AmiQPlace - Strona Główna.css">
+  <link rel="stylesheet" href="AmiQPlace - Auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+  <header class="header auth-header">
+    <div class="container header-inner">
+      <a href="AmiQPlace.com - Strona Główna.html" class="logo" aria-label="AmiQPlace — strona główna">
+        <span class="white">AmiQ</span><span class="gradient">Place</span>
+      </a>
+
+      <nav class="nav" aria-label="Menu główne">
+        <a href="o-nas.html">O nas</a>
+        <a href="faq.html">FAQ</a>
+        <a href="AmiQPlace.com - Strona Główna.html#plans">Plany</a>
+        <a href="regulamin.html">Regulamin</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+
+      <a href="Register.html" class="login">Rejestracja</a>
+
+      <button
+        type="button"
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Otwórz lub zamknij menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu-drawer"
+      >
+        <span class="menu-toggle__box" aria-hidden="true">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <div
+    class="mobile-menu"
+    id="mobile-menu-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menu nawigacji mobilnej"
+    aria-hidden="true"
+  >
+    <div class="mobile-menu__inner">
+      <div class="mobile-menu-header">
+        <span class="logo-gradient">AmiQPlace</span>
+        <button type="button" class="close-menu" aria-label="Zamknij menu">
+          <span class="close-menu__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <nav class="mobile-nav" aria-label="Nawigacja (mobile)">
+        <a href="o-nas.html">O nas</a>
+        <a href="faq.html">FAQ</a>
+        <a href="AmiQPlace.com - Strona Główna.html#plans">Plany</a>
+        <a href="regulamin.html">Regulamin</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <div class="mobile-menu__divider" aria-hidden="true"></div>
+      <div class="mobile-auth">
+        <a href="Register.html" class="mobile-btn mobile-btn--primary">
+          <i class="fas fa-user-plus" aria-hidden="true"></i>
+          Utwórz konto
+        </a>
+        <p class="mobile-hint">Już masz konto? Jesteś na stronie logowania.</p>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+
+  <main>
+    <div class="auth-layout">
+      <aside class="auth-aside" aria-hidden="false">
+        <div class="auth-aside__ambient" aria-hidden="true">
+          <div class="auth-aside__orb auth-aside__orb--a"></div>
+          <div class="auth-aside__orb auth-aside__orb--b"></div>
+        </div>
+        <div class="auth-aside__inner">
+          <p class="auth-aside__eyebrow"><i class="fas fa-shield-halved" aria-hidden="true"></i> Bezpieczne logowanie</p>
+          <h1 class="auth-aside__title">Witaj z powrotem w <span class="gradient-text">AmiQPlace</span></h1>
+          <p class="auth-aside__lead">
+            Zarządzaj sklepem, zamówieniami i płatnościami z jednego panelu — szyfrowane połączenie SSL i ochrona konta w standardzie.
+          </p>
+          <ul class="auth-aside__list">
+            <li><i class="fas fa-bolt" aria-hidden="true"></i> Dwuskładnikowe logowanie — w przygotowaniu w produkcji</li>
+            <li><i class="fas fa-clock-rotate-left" aria-hidden="true"></i> Historia logowań i aktywne sesje</li>
+            <li><i class="fas fa-life-ring" aria-hidden="true"></i> Wsparcie po polsku, 7 dni w tygodniu</li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="auth-panel">
+        <div class="auth-panel__mesh" aria-hidden="true"></div>
+        <div class="auth-card">
+          <div class="auth-card__inner">
+            <div class="auth-card__head">
+              <h1>Zaloguj się</h1>
+              <p>Nie masz konta? <a href="Register.html">Utwórz je za darmo</a> — 14 dni trial.</p>
+            </div>
+
+            <p class="auth-banner auth-banner--info" id="login-banner" hidden></p>
+
+            <p class="auth-banner auth-banner--info">
+              <strong>Konto demonstracyjne:</strong> <code style="font-size:0.9em">demo@amiqplace.pl</code> · hasło
+              <code style="font-size:0.9em">AmiQDemo2026!</code> — albo zarejestruj się i potwierdź e-mail (symulacja w przeglądarce).
+            </p>
+
+            <form class="auth-form" id="form-login" novalidate>
+              <div class="auth-field">
+                <label for="login-email">E-mail</label>
+                <input
+                  id="login-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  placeholder="twoj@email.pl"
+                >
+                <p class="auth-field__error" role="alert"></p>
+              </div>
+
+              <div class="auth-field">
+                <label for="login-password">Hasło</label>
+                <div class="auth-field__wrap">
+                  <input
+                    id="login-password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                    minlength="8"
+                    placeholder="••••••••"
+                  >
+                  <button
+                    type="button"
+                    class="auth-toggle-pass"
+                    data-toggle-password
+                    aria-controls="login-password"
+                    aria-label="Pokaż hasło"
+                  >
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <p class="auth-field__error" role="alert"></p>
+              </div>
+
+              <div class="auth-row">
+                <label class="auth-check" for="login-remember">
+                  <input type="checkbox" id="login-remember" name="remember">
+                  <span>Zapamiętaj mnie na tym urządzeniu</span>
+                </label>
+                <a class="auth-link-muted" href="forgot-password.html">Nie pamiętasz hasła?</a>
+              </div>
+
+              <button type="submit" class="auth-submit">
+                <i class="fas fa-right-to-bracket" aria-hidden="true"></i>
+                Zaloguj się
+              </button>
+            </form>
+
+            <p class="auth-divider" role="presentation">lub</p>
+
+            <div class="auth-social">
+              <button type="button" class="auth-social__btn" disabled title="Wymaga konfiguracji OAuth po stronie serwera">
+                <i class="fab fa-google" aria-hidden="true"></i>
+                Google
+              </button>
+              <button type="button" class="auth-social__btn" disabled title="Wymaga konfiguracji OAuth po stronie serwera">
+                <i class="fab fa-microsoft" aria-hidden="true"></i>
+                Microsoft
+              </button>
+            </div>
+            <p class="auth-field__hint" style="margin-top:0.75rem;text-align:center">
+              Logowanie społecznościowe będzie dostępne po podłączeniu backendu (OAuth 2.0).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="auth-footer-min">
+    <div class="auth-footer-min__inner">
+      <span>© 2026 AmiQPlace</span>
+      <div class="auth-footer-min__links">
+        <a href="regulamin.html">Regulamin</a>
+        <a href="regulamin.html">Prywatność</a>
+        <a href="kontakt.html">Kontakt</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="auth.js" defer></script>
+</body>
+</html>
